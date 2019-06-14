@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/opensudoku-android.iml" filepath="$PROJECT_DIR$/opensudoku-android.iml" />
+      <module fileurl="file://D:\opensudoku\opensudoku-android\app\app.iml" filepath="D:\opensudoku\opensudoku-android\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/opensudoku-android.iml" filepath="$PROJECT_DIR$/.idea/opensudoku-android.iml" />
+      <module fileurl="file://D:\opensudoku\opensudoku-android\opensudoku-android.iml" filepath="D:\opensudoku\opensudoku-android\opensudoku-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/zipzapsdk/zipzapsdk.iml" filepath="$PROJECT_DIR$/zipzapsdk/zipzapsdk.iml" />
+      <module fileurl="file://D:\opensudoku\opensudoku-android\zipzapsdk\zipzapsdk.iml" filepath="D:\opensudoku\opensudoku-android\zipzapsdk\zipzapsdk.iml" />
     </modules>
   </component>
 </project>

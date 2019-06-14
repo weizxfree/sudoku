@@ -43,6 +43,11 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import cz.romario.opensudoku.R;
 import cz.romario.opensudoku.db.FolderColumns;
 import cz.romario.opensudoku.db.SudokuDatabase;
@@ -88,6 +93,15 @@ public class FolderListActivity extends ListActivity {
 
 		setContentView(R.layout.folder_list);
 		View getMorePuzzles = (View) findViewById(R.id.get_more_puzzles);
+
+		MobileAds.initialize(this, "ca-app-pub-9502399903503905~9271472988");
+
+
+
+		AdView mAdView = (AdView) findViewById(R.id.adView);
+		AdRequest adRequest = new AdRequest.Builder().build();
+		mAdView.loadAd(adRequest);
+
 
 		setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
 		// Inform the list we provide context menus for items

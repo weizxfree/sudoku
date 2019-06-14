@@ -4,6 +4,12 @@
 		  android:installLocation="auto" android:versionName="1.1.5" android:versionCode="1105">
 	<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="4"/>
 	<application android:icon="@drawable/opensudoku_logo_72" android:label="@string/app_name">
+
+		<meta-data
+			android:name="com.google.android.gms.ads.APPLICATION_ID"
+			android:value="ca-app-pub-9502399903503905~9271472988"/>
+
+
 		<activity android:name=".gui.FolderListActivity"
 				  android:label="@string/app_name">
 			<intent-filter>
