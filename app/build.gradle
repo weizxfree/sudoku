@@ -55,4 +55,14 @@ android {
 
 dependencies {
     compile project(':zipzapsdk')
+    compile(name: 'mintegral_alphab', ext: 'aar')
+    compile(name: 'mintegral_chinacommon', ext: 'aar')
+    compile(name: 'mintegral_interstitial', ext: 'aar')
+    compile(name: 'mintegral_mtgdownloads', ext: 'aar')
+    compile(name: 'mintegral_mtgjscommon', ext: 'aar')
+    compile(name: 'mintegral_interstitialvideo', ext: 'aar')
+    compile(name: 'mintegral_playercommon', ext: 'aar')
+    compile(name: 'mintegral_reward', ext: 'aar')
+    compile(name: 'mintegral_videocommon', ext: 'aar')
+    compile(name: 'mintegral_videojs', ext: 'aar')
 }

@@ -44,6 +44,15 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.mintegral.msdk.MIntegralConstans;
+import com.mintegral.msdk.interstitialvideo.out.InterstitialVideoListener;
+import com.mintegral.msdk.interstitialvideo.out.MTGInterstitialVideoHandler;
+import com.mintegral.msdk.out.InterstitialListener;
+import com.mintegral.msdk.out.MTGInterstitialHandler;
+
+import java.util.HashMap;
 
 import cz.romario.opensudoku.R;
 import cz.romario.opensudoku.db.FolderColumns;
@@ -84,6 +93,7 @@ public class FolderListActivity extends ListActivity {
     private TextView mRenameFolderNameInput;
     private long mRenameFolderID;
     private long mDeleteFolderID;
+    MTGInterstitialVideoHandler mMtgInterstitalVideoHandler;
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
@@ -91,12 +101,76 @@ public class FolderListActivity extends ListActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.folder_list);
-        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
 
         setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
         // Inform the list we provide context menus for items
         getListView().setOnCreateContextMenuListener(this);
 
+
+        mMtgInterstitalVideoHandler = new MTGInterstitialVideoHandler(this, "113807");
+
+        mMtgInterstitalVideoHandler.load();
+
+        mMtgInterstitalVideoHandler.setInterstitialVideoListener(new InterstitialVideoListener() {
+
+            @Override
+            public void onLoadSuccess(String unitId) {
+                Log.e(TAG, "onLoadSuccess:"+Thread.currentThread());
+                Toast.makeText(getApplicationContext(), "onLoadSuccess()", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onVideoLoadSuccess(String unitId) {
+                Log.e(TAG, "onVideoLoadSuccess:"+Thread.currentThread());
+                Toast.makeText(getApplicationContext(), "onVideoLoadSuccess()", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onVideoLoadFail(String errorMsg) {
+                Log.e(TAG, "onVideoLoadFail errorMsg:"+errorMsg);
+                Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onShowFail(String errorMsg) {
+                Log.e(TAG, "onShowFail=" + errorMsg);
+                Toast.makeText(getApplicationContext(), "errorMsg:" + errorMsg, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdShow() {
+                Log.e(TAG, "onAdShow");
+                Toast.makeText(getApplicationContext(), "onAdShow", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdClose(boolean isCompleteView) {
+                Log.e(TAG, "onAdClose rewardinfo :" +  "isCompleteView："+isCompleteView);
+                Toast.makeText(getApplicationContext(),"onADClose:"+isCompleteView,Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onVideoAdClicked(String unitId) {
+                Log.e(TAG, "onVideoAdClicked");
+                Toast.makeText(getApplicationContext(), "onVideoAdClicked", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onVideoComplete(String unitId) {
+                Log.e(TAG,"onVideoComplete");
+                Toast.makeText(getApplicationContext(),"onVideoComplete",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onEndcardShow(String unitId) {
+                Log.e(TAG,"onEndcardShow");
+                Toast.makeText(getApplicationContext(),"onEndcardShow",Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
         mDatabase = new SudokuDatabase(getApplicationContext());
         mCursor = mDatabase.getFolderList();
@@ -351,6 +425,7 @@ public class FolderListActivity extends ListActivity {
         Intent i = new Intent(this, SudokuListActivity.class);
         i.putExtra(SudokuListActivity.EXTRA_FOLDER_ID, id);
         startActivity(i);
+        mMtgInterstitalVideoHandler.show();
     }
 
     private void updateList() {
