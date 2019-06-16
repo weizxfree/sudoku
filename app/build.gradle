@@ -1,26 +1,58 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 26
     buildToolsVersion "25.0.0"
+        lintOptions {
+            // Or, if you prefer, you can continue to check for errors in release builds,
+            // but continue the build even when errors are found:
+            abortOnError false
+        }
+
 
     defaultConfig {
         applicationId "cz.romario.opensudoku"
-        minSdkVersion 19
-        targetSdkVersion 23
-        testApplicationId "cz.romario.opensudoku.test"
-        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+        minSdkVersion 21
+        targetSdkVersion 26
     }
+
+    signingConfigs {
+        debug {
+            storeFile file("sudoku.jks")
+            storePassword "123456"
+            keyAlias "key0"
+            keyPassword "123456"
+        }
+        //gradle assembleRelease
+        release {
+            storeFile file("sudoku.jks")
+            storePassword "123456"
+            keyAlias "key0"
+            keyPassword "123456"
+        }
+    }
+
 
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
         }
     }
 }
 
 dependencies {
     compile project(':zipzapsdk')
-    compile 'com.google.android.gms:play-services-ads:17.2.1'
 }
